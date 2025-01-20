@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Preloadify - Custom Preloader
+ * Plugin Name: PreloadX - Custom Preloader
  * Description: A customizable preloader plugin with 10 built-in options and a custom preloader option for your WordPress site.
- * Version: 1.1
+ * Version: 1.2
  * Author: VR
  * Author URI: https://yourwebsite.com
  * License: GPL2
@@ -14,69 +14,69 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Register the plugin settings page
-function preloadify_menu() {
+function preloadx_menu() {
     add_menu_page(
-        'Preloadify Settings',          // Page Title
-        'Preloadify Settings',          // Menu Title
-        'manage_options',               // Capability
-        'preloadify',                   // Menu Slug
-        'preloadify_settings_page',     // Function to display settings page
-        'dashicons-image-filter',       // Icon
-        100                             // Position
+        'PreloadX Settings',          // Page Title
+        'PreloadX Settings',          // Menu Title
+        'manage_options',             // Capability
+        'preloadx',                   // Menu Slug
+        'preloadx_settings_page',     // Function to display settings page
+        'dashicons-image-filter',     // Icon
+        100                           // Position
     );
 }
-add_action( 'admin_menu', 'preloadify_menu' );
+add_action( 'admin_menu', 'preloadx_menu' );
 
 // Display the plugin settings page
-function preloadify_settings_page() {
+function preloadx_settings_page() {
     ?>
     <div class="wrap">
-        <h1>Preloadify Settings</h1>
+        <h1>PreloadX Settings</h1>
         <form method="post" action="options.php">
             <?php
-            settings_fields( 'preloadify_options_group' );
-            do_settings_sections( 'preloadify' );
+            settings_fields( 'preloadx_options_group' );
+            do_settings_sections( 'preloadx' );
             ?>
             <table class="form-table">
                 <tr valign="top">
+                    <td>
+                        Background Color: <input type="color" name="preloadx_bgcolor" value="<?php echo esc_attr( get_option( 'preloadx_bgcolor', '#000' ) ); ?>" />
+                    </td>
+                    <td>
+                        Preloader Color: <input type="color" name="preloadx_color" value="<?php echo esc_attr( get_option( 'preloadx_color', '#3498db' ) ); ?>" />
+                    </td>
+                </tr>
+                <tr valign="top">
                     <th scope="row">Select Preloader</th>
                     <td>
-                        <select name="preloadify_selected" id="preloadify_selected">
-                            <option value="none" <?php selected( get_option( 'preloadify_selected' ), 'none' ); ?>>None</option>
-                            <option value="spinner" <?php selected( get_option( 'preloadify_selected' ), 'spinner' ); ?>>Spinner</option>
-                            <option value="roller" <?php selected( get_option( 'preloadify_selected' ), 'roller' ); ?>>Roller</option>
-                            <option value="loading-text" <?php selected( get_option( 'preloadify_selected' ), 'loading-text' ); ?>>Loading Text</option>
-                            <option value="rounded-progress" <?php selected( get_option( 'preloadify_selected' ), 'rounded-progress' ); ?>>Rounded Progress</option>
-                            <option value="square" <?php selected( get_option( 'preloadify_selected' ), 'square' ); ?>>Square</option>
-                            <option value="hourglass" <?php selected( get_option( 'preloadify_selected' ), 'hourglass' ); ?>>Hourglass</option>
-                            <option value="clock-loader" <?php selected( get_option( 'preloadify_selected' ), 'clock-loader' ); ?>>Clock Loader</option>
-                            <option value="wave" <?php selected( get_option( 'preloadify_selected' ), 'wave' ); ?>>Wave</option>
-                            <option value="pulsar" <?php selected( get_option( 'preloadify_selected' ), 'pulsar' ); ?>>Pulsar</option>
-                            <option value="custom" <?php selected( get_option( 'preloadify_selected' ), 'custom' ); ?>>Custom</option>
-                        </select>
-                        <div id="preloader-preview" class="preloader-preview"></div>
-                    </td>
-                </tr>
-                <tr valign="top">
-                    <th scope="row">Preloader Background Color</th>
-                    <td>
-                        <input type="color" name="preloadify_bgcolor" value="<?php echo esc_attr( get_option( 'preloadify_bgcolor', '#000' ) ); ?>" />
-                        <p class="description">Choose the Background-Color for the preloader.</p>
-                    </td>
-                </tr>
-                <tr valign="top">
-                    <th scope="row">Preloader Color</th>
-                    <td>
-                        <input type="color" name="preloadify_color" value="<?php echo esc_attr( get_option( 'preloadify_color', '#3498db' ) ); ?>" />
-                        <p class="description">Choose the color for the preloader.</p>
-                    </td>
-                </tr>
+                        <div id="preloader-gallery" style="display: flex; flex-wrap: wrap; gap: 20px;">
+                            <?php
+                            $selected_preloader = get_option( 'preloadx_selected', 'none' );
+                            $preloaders = [
+                                'none' => 'None',
+                                'loading-text' => 'Loading Text',
+                                'rounded-progress' => 'Rounded Progress',
+                                'square' => 'Square',
+                                'hourglass' => 'Hourglass',
+                                'clock-loader' => 'Clock Loader'
+                            ];
 
-                <tr valign="top" class="custom-preloader-field" style="display: none;">
-                    <th scope="row">Custom Preloader HTML</th>
-                    <td>
-                        <textarea name="preloadify_custom_html" rows="5" cols="50"><?php echo esc_textarea( get_option( 'preloadify_custom_html' ) ); ?></textarea>
-                        <p class="description">Add your custom preloader HTML here.</p>
+                            foreach ( $preloaders as $value => $label ) {
+                                $checked = ( $selected_preloader === $value ) ? 'checked' : '';
+                                ?>
+                                <div style="text-align: center; width: 150px;">
+                                    <div class="preloader-preview" style="height: 100px; width: 100px; line-height: 100px; margin: 0 auto; border: 1px solid black; border-radius: 5px; overflow: hidden">
+                                        <?php echo preloadx_get_preloader_html( $value ); ?>
+                                    </div>
+                                    <label>
+                                        <input type="radio" name="preloadx_selected" value="<?php echo esc_attr( $value ); ?>" <?php echo $checked; ?> onclick="updatePreloaderPreview(this.value)" />
+                                        <?php echo esc_html( $label ); ?>
+                                    </label>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                        </div>
                     </td>
                 </tr>
             </table>
@@ -87,89 +87,103 @@ function preloadify_settings_page() {
 }
 
 // Register plugin settings
-function preloadify_register_settings() {
-    register_setting( 'preloadify_options_group', 'preloadify_selected' );
-    register_setting( 'preloadify_options_group', 'preloadify_custom_html' );
-    register_setting( 'preloadify_options_group', 'preloadify_bgcolor' );
-    register_setting( 'preloadify_options_group', 'preloadify_color' );
-    add_settings_section( 'preloadify_section', '', null, 'preloadify' );
+function preloadx_register_settings() {
+    register_setting( 'preloadx_options_group', 'preloadx_selected' );
+    register_setting( 'preloadx_options_group', 'preloadx_custom_html' );
+    register_setting( 'preloadx_options_group', 'preloadx_color' );
+    register_setting( 'preloadx_options_group', 'preloadx_bgcolor' );
+    add_settings_section( 'preloadx_section', '', null, 'preloadx' );
 }
-add_action( 'admin_init', 'preloadify_register_settings' );
+add_action( 'admin_init', 'preloadx_register_settings' );
 
-// Enqueue the styles and scripts for the admin panel
-function preloadify_admin_enqueue_scripts($hook) {
-
-    if ($hook !== 'toplevel_page_preloadify') {
-        return;
-    }
-
-    wp_enqueue_style('preloadify-admin-style', plugins_url('assets/style.css', __FILE__));
-    wp_enqueue_script('preloadify-admin-script', plugins_url('assets/preview.js', __FILE__), array(), null, true);
+// Enqueue plugin styles
+function preloadx_enqueue_styles() {
+    wp_enqueue_style( 'preloadx-style', plugins_url( 'assets/style.css', __FILE__ ) );
 }
-add_action('admin_enqueue_scripts', 'preloadify_admin_enqueue_scripts');
+add_action( 'wp_enqueue_scripts', 'preloadx_enqueue_styles' );
+add_action( 'admin_enqueue_scripts', 'preloadx_enqueue_styles' );
 
+// Get preloader HTML based on selection
+function preloadx_get_preloader_html( $selected_preloader ) {
+    $color = get_option( 'preloadx_color', '#3498db' );
+    $bgcolor = get_option( 'preloadx_bgcolor', '#000' );
 
-// Enqueue the CSS file in the <head> section
-function preloadify_enqueue_styles() {
-    wp_enqueue_style( 'preloadify-style', plugins_url( 'assets/style.css', __FILE__ ) );
-    wp_enqueue_script( 'preloadify-preview', plugins_url( 'assets/preview.js', __FILE__ ), array('jquery'), null, true );
-}
-add_action( 'wp_enqueue_scripts', 'preloadify_enqueue_styles' );
+    // Check if we are in the admin area
+    $is_admin = is_admin();
 
-// Insert the preloader directly after <body> tag using wp_body_open hook
-function preloadify_insert_header() {
-    $selected_preloader = get_option( 'preloadify_selected', 'none' );
-    $bgcolor = get_option( 'preloadify_bgcolor', '#000' );
-    $color = get_option( 'preloadify_color', '#3498db' );
-
-    if ($selected_preloader === 'none') return;
-
+    // Default preloader html
     $preloader_html = '';
 
-    if ($selected_preloader === 'spinner') {
-        $preloader_html = '<div class="p-preloader"><div class="loader spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>';
-    } elseif ($selected_preloader === 'loading-text') {
-        $preloader_html = '<div class="p-preloader"><div class="loader loading-text"></div></div>';
-    } elseif ($selected_preloader === 'rounded-progress') {
-        $preloader_html = '<div class="p-preloader"><div class="loader rounded-progress"></div></div>';
-    } elseif ($selected_preloader === 'square') {
-        $preloader_html = '<div class="p-preloader"><div class="loader square"></div></div>';
-    } elseif ($selected_preloader === 'hourglass') {
-        $preloader_html = '<div class="p-preloader"><div class="loader hourglass"></div></div>';
-    } elseif ($selected_preloader === 'clock-loader') {
-        $preloader_html = '<div class="p-preloader"><div class="loader clock-loader"></div></div>';
-    } elseif ($selected_preloader === 'roller') {
-        $preloader_html = '<div class="p-preloader"><div class="loader roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>';
-    } elseif ($selected_preloader === 'wave') {
-        $preloader_html = '<div class="p-preloader"><div class="loader wave"></div></div>';
-    } elseif ($selected_preloader === 'pulsar') {
-        $preloader_html = '<div class="p-preloader"><div class="loader pulsar"></div></div>';
+    // Check which preloader was selected
+    if ( $selected_preloader === 'loading-text' ) {
+        $preloader_html = '<div class="' . ( $is_admin ? 'pxpreloader-preview' : 'pxpreloader' ) . '"><div class="loader loading-text"></div></div>';
+    } elseif ( $selected_preloader === 'rounded-progress' ) {
+        $preloader_html = '<div class="' . ( $is_admin ? 'pxpreloader-preview' : 'pxpreloader' ) . '"><div class="loader rounded-progress"></div></div>';
+    } elseif ( $selected_preloader === 'square' ) {
+        $preloader_html = '<div class="' . ( $is_admin ? 'pxpreloader-preview' : 'pxpreloader' ) . '"><div class="loader square"></div></div>';
+    } elseif ( $selected_preloader === 'hourglass' ) {
+        $preloader_html = '<div class="' . ( $is_admin ? 'pxpreloader-preview' : 'pxpreloader' ) . '"><div class="loader hourglass"></div></div>';
+    } elseif ( $selected_preloader === 'clock-loader' ) {
+        $preloader_html = '<div class="' . ( $is_admin ? 'pxpreloader-preview' : 'pxpreloader' ) . '"><div class="loader clock-loader"></div></div>';
+    } elseif ( $selected_preloader === 'fade' ) {
+        $preloader_html = '<div class="' . ( $is_admin ? 'pxpreloader-preview' : 'pxpreloader' ) . '"><div class="loader fade"></div></div>';
+    } elseif ( $selected_preloader === 'circle' ) {
+        $preloader_html = '<div class="' . ( $is_admin ? 'pxpreloader-preview' : 'pxpreloader' ) . '"><div class="loader circle"></div></div>';
+    } elseif ( $selected_preloader === 'wave' ) {
+        $preloader_html = '<div class="' . ( $is_admin ? 'pxpreloader-preview' : 'pxpreloader' ) . '"><div class="loader wave"></div></div>';
+    } elseif ( $selected_preloader === 'pulsar' ) {
+        $preloader_html = '<div class="' . ( $is_admin ? 'pxpreloader-preview' : 'pxpreloader' ) . '"><div class="loader pulsar"></div></div>';
     }
 
-    // Add custom HTML preloader if provided
-    if ($selected_preloader === 'custom') {
-        $preloader_html = get_option( 'preloadify_custom_html', '' );
+    // Add custom HTML preloader if selected
+    if ( $selected_preloader === 'custom' ) {
+        $preloader_html = get_option( 'preloadx_custom_html', '' );
     }
 
-    // Output the HTML preloader
-    echo $preloader_html;
-    echo '<style>
-        :root {
-            --preloader-bgcolor: ' . esc_attr( $bgcolor ) . ';
-            --preloader-color: ' . esc_attr( $color ) . ';
-        }
-    </style>';
+    return $preloader_html;
 }
-add_action( 'wp_body_open', 'preloadify_insert_header', 1 );
+
+
+// Insert the preloader directly after <body> tag using wp_body_open hook
+function preloadx_insert_header() {
+    $selected_preloader = get_option( 'preloadx_selected', 'none' );
+    $color = get_option( 'preloadx_color', '#3498db' );
+    $bgcolor = get_option( 'preloadx_bgcolor', '#000' );
+
+    if ( $selected_preloader === 'none' ) return;
+
+    echo preloadx_get_preloader_html( $selected_preloader );
+    echo '<style>
+    :root {
+        --preloader-bgcolor: ' . esc_attr( $bgcolor ) . ';
+        --preloader-color: ' . esc_attr( $color ) . ';
+    }
+        
+    .pxpreloader-preview>.loader {
+        transform: scale(0.5) !important;
+        transform-origin: left !important;
+    }
+</style>';
+}
+add_action( 'wp_body_open', 'preloadx_insert_header', 1 );
 
 // Add JS to hide preloader on page load
-function preloadify_hide_preloader_js() {
+function preloadx_hide_preloader_js() {
     ?>
     <script>
         window.onload = function() {
-            document.querySelector('.preloader').classList.add('no-show');
+            document.querySelector('.pxpreloader').classList.add('no-show');
         };
+
+        // Function to update preloader preview
+        function updatePreloaderPreview(value) {
+            var previewDivs = document.querySelectorAll('.preloader-preview');
+            previewDivs.forEach(function(div) {
+                div.innerHTML = '<?php echo preloadx_get_preloader_html( "none" ); ?>';
+                div.innerHTML = '<?php echo preloadx_get_preloader_html( "' + value + '" ); ?>';
+            });
+        }
     </script>
     <?php
 }
-add_action( 'wp_head', 'preloadify_hide_preloader_js', 100 );
+add_action( 'wp_head', 'preloadx_hide_preloader_js', 100 );
