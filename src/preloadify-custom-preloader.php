@@ -64,8 +64,8 @@ function preloadx_settings_page() {
                             foreach ( $preloaders as $value => $label ) {
                                 $checked = ( $selected_preloader === $value ) ? 'checked' : '';
                                 ?>
-                                <div style="text-align: center; width: 150px;">
-                                    <div class="preloader-preview" style="height: 100px; width: 100px; line-height: 100px; margin: 0 auto; border: 1px solid black; border-radius: 5px; overflow: hidden">
+                                <div style="text-align: center; width: 250px;">
+                                    <div class="preloader-preview">
                                         <?php echo preloadx_get_preloader_html( $value ); ?>
                                     </div>
                                     <label>
@@ -105,13 +105,10 @@ add_action( 'admin_enqueue_scripts', 'preloadx_enqueue_styles' );
 
 // Get preloader HTML based on selection
 function preloadx_get_preloader_html( $selected_preloader ) {
-    $color = get_option( 'preloadx_color', '#3498db' );
-    $bgcolor = get_option( 'preloadx_bgcolor', '#000' );
+    $color = get_option( 'preloadx_color', '#3498db' );  // Fall back to #3498db if not set
+    $bgcolor = get_option( 'preloadx_bgcolor', '#000' );  // Fall back to #000 if not set
 
-    // Check if we are in the admin area
     $is_admin = is_admin();
-
-    // Default preloader html
     $preloader_html = '';
 
     // Check which preloader was selected
@@ -143,31 +140,33 @@ function preloadx_get_preloader_html( $selected_preloader ) {
     return $preloader_html;
 }
 
-
-// Insert the preloader directly after <body> tag using wp_body_open hook
+// Insert the preloader and styles (for both admin and front-end)
 function preloadx_insert_header() {
     $selected_preloader = get_option( 'preloadx_selected', 'none' );
-    $color = get_option( 'preloadx_color', '#3498db' );
-    $bgcolor = get_option( 'preloadx_bgcolor', '#000' );
+    $color = get_option( 'preloadx_color', '#3498db' );  // Fall back to #3498db if not set
+    $bgcolor = get_option( 'preloadx_bgcolor', '#000' );  // Fall back to #000 if not set
 
+    // Only show preloader if selected is not 'none'
     if ( $selected_preloader === 'none' ) return;
+    $preloader_html = preloadx_get_preloader_html( $selected_preloader );
 
-    echo preloadx_get_preloader_html( $selected_preloader );
+    if (!is_admin()) {
+        echo $preloader_html;  
+    }
     echo '<style>
     :root {
         --preloader-bgcolor: ' . esc_attr( $bgcolor ) . ';
         --preloader-color: ' . esc_attr( $color ) . ';
     }
-        
-    .pxpreloader-preview>.loader {
-        transform: scale(0.5) !important;
-        transform-origin: left !important;
-    }
-</style>';
+    </style>';
 }
-add_action( 'wp_body_open', 'preloadx_insert_header', 1 );
 
-// Add JS to hide preloader on page load
+// Hook into the appropriate actions
+add_action( 'wp_body_open', 'preloadx_insert_header', 1 );    // For front-end
+add_action( 'admin_head', 'preloadx_insert_header', 1 );      // For admin panel
+
+
+// Add JS to hide preloader on page load and update preview colors dynamically
 function preloadx_hide_preloader_js() {
     ?>
     <script>
@@ -183,7 +182,33 @@ function preloadx_hide_preloader_js() {
                 div.innerHTML = '<?php echo preloadx_get_preloader_html( "' + value + '" ); ?>';
             });
         }
+
+        // Dynamically update the CSS variables and loader previews when the color inputs change
+        function updateColorVariablesAndPreviews() {
+            console.log(document.querySelector('[name="preloadx_bgcolor"]'))
+            var bgcolor = document.querySelector('[name="preloadx_bgcolor"]').value;
+            var color = document.querySelector('[name="preloadx_color"]').value;
+
+            // Update the CSS custom properties (variables)
+            document.documentElement.style.setProperty('--preloader-bgcolor', bgcolor);
+            document.documentElement.style.setProperty('--preloader-color', color);
+
+            // Update the loader previews in the gallery
+            var previewDivs = document.querySelectorAll('.preloader-preview');
+            previewDivs.forEach(function(div) {
+                var preloaderType = div.querySelector('input[type="radio"]:checked') ? div.querySelector('input[type="radio"]:checked').value : 'none';
+                div.innerHTML = '<?php echo preloadx_get_preloader_html( "' + preloaderType + '" ); ?>';
+            });
+        }
+
+        // Add event listeners to the color inputs to update colors dynamically
+        document.querySelector('[name="preloadx_bgcolor"]').addEventListener('input', updateColorVariablesAndPreviews);
+        document.querySelector('[name="preloadx_color"]').addEventListener('input', updateColorVariablesAndPreviews);
+
+        // Initialize color previews on page load
+        window.onload = updateColorVariablesAndPreviews;
     </script>
     <?php
 }
 add_action( 'wp_head', 'preloadx_hide_preloader_js', 100 );
+?>

@@ -25,8 +25,16 @@
 }
 
 .preloader-preview .pxpreloader-preview {
-  width: 100%;
-  height: 100%;
+  height: 200px;
+  width: 200px;
+  line-height: 200px;
+  margin: 0 auto;
+  border: 1px solid black;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: var(--preloader-bgcolor, #000);
+  color: var(--preloader-color, #3498db);
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,7 +46,7 @@
   object-fit: contain;
 }
 
-.pxpreloader .loading-text {
+.loading-text {
   width: fit-content;
   font-size: 40px;
   font-family: system-ui,sans-serif;
@@ -49,13 +57,16 @@
   background: conic-gradient(var(--preloader-color, #3498db) 0 0) 0/0% 100% no-repeat text;
   animation: l1 var(--preloader-speed, 1s) linear infinite;
 }
-.pxpreloader .loading-text:before {
+.pxpreloader-preview .loading-text {
+  font-size: 30px;
+}
+.loading-text:before {
   content: "Loading...";
 }
 @keyframes l1 {
   to{background-size: 120% 100%}
 }
-.pxpreloader .rounded-progress {
+.rounded-progress {
   width: 120px;
   height: 20px;
   border-radius: 20px;
@@ -67,7 +78,7 @@
 @keyframes l2 {
   100% {background-size:110%}
 }
-.pxpreloader .square {
+.square {
   width: 85px;
   height: 50px;
   --g1:conic-gradient(from  90deg at left   3px top   3px,#0000 90deg,var(--preloader-color, #3498db) 0);
