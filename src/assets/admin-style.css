@@ -1,0 +1,35 @@
+/* Style for the preloader preview in the admin panel */
+.p-preloader-preview {
+    margin-top: 10px;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.loader {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.loader.spinner div {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #3498db;
+    animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+    0% { top: 0; left: 0; }
+    25% { top: 0; left: 50%; }
+    50% { top: 50%; left: 50%; }
+    75% { top: 50%; left: 0; }
+    100% { top: 0; left: 0; }
+}
