@@ -73,6 +73,9 @@ Add a stylish, seamless preloading experience to your WordPress site with Preloa
 
 ## FAQs
 
+### How do I customize the preloader?
+Navigate to PreloadX Settings → Select desired preloader and adjust the styles as needed & click 'Save Changes'.
+
 ### Can I customize the preloader’s colors?
 You can customize the **background color** of your preloader, and for some loaders, you can also adjust the **foreground color**. However, for certain preloader styles that use multiple colors to create visual effects, the foreground color customization is not available.
 
