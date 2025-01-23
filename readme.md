@@ -44,17 +44,34 @@ For more detailed instructions on manual plugin installation, refer to the [Word
 Add a stylish, seamless preloading experience to your WordPress site with PreloadX, and keep your visitors engaged during page load times!
 
 ## Screenshots
+##### Bouncing Bubbles
 ![Bouncing Bubbles](/images/bouncing-bubbles.gif)
-![Clock](/images/clock.gif)
-![EKG Waves](/images/ekg-waves.gif)
+
+##### Hourglass
 ![Hourglass](/images/hourglass.gif)
+
+##### Loading Text
 ![Loading Text](/images/loading-text.gif)
+
+##### Spinner
+![EKG Waves](/images/spinner.gif)
+
+##### Scaling Bubble Colors
 ![Scaling Bubble Colors](/images/scaling-bubble-colors.gif)
+
+##### Square Loader
 ![Square](/images/square.gif)
+
+##### Rounded Loader
+![Square](/images/rounded-loader.gif)
+
+##### Wavy Colors
 ![Wavy Colors](/images/wavy-colors.gif)
 
+##### Clock
+![Clock](/images/clock.gif)
 
-## Frequently Asked Questions
+## FAQs
 
 ### Can I customize the preloader’s colors?
 You can customize the **background color** of your preloader, and for some loaders, you can also adjust the **foreground color**. However, for certain preloader styles that use multiple colors to create visual effects, the foreground color customization is not available.
