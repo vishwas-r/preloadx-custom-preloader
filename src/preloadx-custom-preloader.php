@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: PreloadX - Custom Preloader
- * Description: A customizable preloader plugin with 10 built-in options and a custom preloader option for your WordPress site.
- * Version: 1.2
- * Author: VR
+ * Description: Customize your WordPress site's preloader with multiple CSS preloaders and flexible background options, including colors, gradients, or images, with adjustable foreground colors.
+ * Version: 1.0
+ * Author: Vishwas R
  * Author URI: https://vishwas.me/
- * License: GPL2
+ * License: GPLv3
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
