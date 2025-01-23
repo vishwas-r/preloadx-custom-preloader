@@ -5,8 +5,8 @@
  * Version: 1.0
  * Author: Vishwas R
  * Author URI: https://vishwas.me/
- * License: GPLv2 or later
- * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ * License: GPLv3
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
