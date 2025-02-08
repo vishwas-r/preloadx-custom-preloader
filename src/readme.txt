@@ -1,7 +1,7 @@
 === PreloadX - Custom Preloader ===
 Contributors: vishwasr
 Donate link: https://www.paypal.com/paypalme/vishwasr92
-Tags: preloader, animation, loader, WordPress preloader, custom preloader
+Tags: preloader, animation, loader, WordPress preloader, custom preloader, css loader
 Requires at least: 5.0
 Tested up to: 6.7.1
 Requires PHP: 7.4
