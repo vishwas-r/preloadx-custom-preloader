@@ -13,7 +13,7 @@
 .pxpreloader.no-show {
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s 0.5s, opacity 0.5s linear !important;
+  transition: opacity 0.5s linear, visibility 0s 0.5s !important;
 }
 
 .preloader-preview {
@@ -326,7 +326,7 @@
   height:20px;
   position: absolute;
   border-radius: 50%;
-  background-color: #fff;
+  background-color: var(--preloader-color, #3498db);
   left:15%;
   transform-origin: 50%;
   animation: bouncing-bubbles-circle .5s alternate infinite ease;
@@ -398,7 +398,7 @@
   top:75px;
   font-size: 20px;
   letter-spacing: 12px;
-  color: #fff;
+  color: var(--preloader-color, #3498db);
   left:15%;
 }
 

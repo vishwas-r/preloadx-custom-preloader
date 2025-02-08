@@ -1,0 +1,188 @@
+.preloadx-wrap .container {
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    width: 800px;
+    padding: 25px 40px 10px 40px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.preloadx-wrap .container .text {
+    background-color: #00b0ff;
+    color: white;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    padding: 14px 0 10px 49px;
+    letter-spacing: 1px;
+    margin-left: -52px;
+    width: 330px;
+    font-size: 28px;
+    font-weight: bold;
+    background: #f12711;
+    background: linear-gradient(to right, #f12711, #f5af19);
+}
+.preloadx-wrap .container form {
+    padding: 30px 0 0 0;
+}
+.preloadx-wrap .container form .form-row {
+    display: flex;
+    margin: 32px 0;
+}
+.preloadx-wrap form .form-row .input-data {
+    width: 100%;
+    height: 40px;
+    margin: 0 20px;
+    position: relative;
+}
+.preloadx-wrap form .form-row {
+    height: 70px;
+}
+.preloadx-wrap .input-data input {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    font-size: 17px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.12);
+}
+.preloadx-wrap .input-data input[type=color] {
+    height: revert;
+}
+.preloadx-wrap .input-data select {
+    width: 100%;
+    max-width: 100%;
+    padding: .375rem 2.25rem .375rem .75rem;
+    -moz-padding-start: calc(0.75rem - 3px);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+.preloadx-wrap .input-data input:focus ~ label,
+.preloadx-wrap .input-data input:valid ~ label {
+    transform: translateY(-20px);
+    font-size: 16px;
+    color: #3498db;
+}
+.preloadx-wrap .input-data label {
+
+    pointer-events: none;
+    bottom: 10px;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+.preloadx-wrap .input-data .underline {
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+}
+.preloadx-wrap .input-data .underline:before {
+    position: absolute;
+    content: "";
+    height: 2px;
+    width: 100%;
+    background: #3498db;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease;
+}
+.preloadx-wrap .input-data input:focus ~ .underline:before,
+.preloadx-wrap .input-data input:valid ~ .underline:before {
+    transform: scale(1);
+}
+.preloadx-wrap .button {
+    --c:  #E95A49;  
+    box-shadow: 0 0 0 .1em inset var(--c) !important; 
+    --_g: linear-gradient(var(--c) 0 0) no-repeat;
+    background: 
+        var(--_g) calc(var(--_p,0%) - 100%) 0%,
+        var(--_g) calc(200% - var(--_p,0%)) 0%,
+        var(--_g) calc(var(--_p,0%) - 100%) 100%,
+        var(--_g) calc(200% - var(--_p,0%)) 100% !important;
+    color: var(--c) !important;
+    background-size: 50.5% calc(var(--_p,0%)/2 + .5%) !important;
+    outline-offset: .1em !important;
+    transition: background-size .4s, background-position 0s .4s !important;
+    font-family: system-ui, sans-serif !important;
+    font-size: 16px !important;
+    cursor: pointer !important;
+    padding: 0px 8px !important;
+    font-weight: bold !important;  
+    border: none !important;
+    margin-top: 5rem !important;
+}
+.preloadx-wrap .button:hover {
+    --_p: 100%;
+    transition: background-position .4s, color .5s, background-size 0s !important;
+    color: #fff !important;
+}
+.preloadx-wrap .button:active {
+    box-shadow: 0 0 9e9q inset #0009 !important; 
+    background-color: var(--c) !important;
+    color: #fff !important;
+}
+@media (max-width: 700px) {
+    .preloadx-wrap .container .text {
+        font-size: 20px;
+    }
+    .preloadx-wrap .container form {
+        padding: 10px 0 0 0;
+    }
+    .preloadx-wrap .container form .form-row {
+        display: block;
+    }
+    .preloadx-wrap form .form-row .input-data {
+        margin: 35px 0 !important;
+    }
+}
+#footer {
+    text-align: center;
+    padding: 10px;
+}
+
+#footer p {
+    font-size: 14px;
+    color: #555;
+}
+.heart {
+    display: inline-block;
+    color: #d53434;
+    animation: animateHeart 1s infinite;
+}
+@keyframes animateHeart {
+0%
+{
+    transform: scale( 1 );
+}
+20%
+{
+    transform: scale( 1.5 );
+}
+40%
+{
+    transform: scale( 1 );
+}
+60%
+{
+    transform: scale( 1.5 );
+}
+80%
+{
+    transform: scale( 1 );
+}
+100%
+{
+    transform: scale( 1 );
+}
+}
+
+#preloadx-settings-response-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+#preloadx-settings-response-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
