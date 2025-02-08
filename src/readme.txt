@@ -5,7 +5,7 @@ Tags: preloader, animation, loader, WordPress preloader, custom preloader, css l
 Requires at least: 5.0
 Tested up to: 6.7.1
 Requires PHP: 7.4
-Stable tag: 1.0
+Stable tag: 1.0.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -84,5 +84,5 @@ No coding is required! PreloadX is designed to be user-friendly, with an easy-to
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.0 =
 * Initial release with 10 Preloaders.
