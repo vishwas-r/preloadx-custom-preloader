@@ -9,7 +9,9 @@
  * @package    Preloadx_Custom_Preloader
  * @subpackage Preloadx_Custom_Preloader/admin/partials
  */
+    if ( !defined( 'ABSPATH' ) ) exit;
 ?>
+
 <?php wp_nonce_field( 'preloadx_nonce_action', 'preloadx_nonce_field' ); ?>
 
 <div class="preloadx-wrap">
@@ -83,10 +85,29 @@
                         <div style="text-align: center; width: 250px;">
                             <div class="preloader-preview">
                                 <?php
-                                    if ( class_exists( 'Preloadx_Custom_Preloader_Utilities' ) ) {
-                                        $preloader_utilities = new Preloadx_Custom_Preloader_Utilities();                                    
+                                    if ( class_exists( 'Preloadx_Cp_5199_Utilities' ) ) {
+                                        $preloader_utilities = new Preloadx_Cp_5199_Utilities();                                    
                                         $preloader_html = $preloader_utilities->preloadx_get_preloader_html($value);
-                                        echo $preloader_html;
+                                        $allowed_tags = array(
+                                            'div'   => array('class' => array(), 'id' => array(), 'style' => array()),
+                                            'span'  => array('class' => array(), 'style' => array()),
+                                            'a'     => array('href' => array(), 'title' => array(), 'target' => array(), 'style' => array()),
+                                            'svg'   => array('class' => array(), 'viewBox' => array(), 'preserveAspectRatio' => array(), 'xmlns' => array(), 'style' => array()),
+                                            'g'     => array('transform' => array(), 'style' => array()),
+                                            'path'  => array(
+                                                'id' => array(),
+                                                'stroke-dasharray' => array(),
+                                                'stroke-dashoffset' => array(),
+                                                'd' => array(),
+                                                'style' => array(),
+                                                'stroke-width' => array(),
+                                                'stroke-linecap' => array(),
+                                                'stroke-linejoin' => array()
+                                            )
+                                        );
+                                        
+                                        echo wp_kses($preloader_html, $allowed_tags);
+                                        
                                         add_action('wp_head', $preloader_utilities->add_inline_root_styles());
                                     }
                                 ?>
@@ -101,8 +122,7 @@
                     ?>
                 </div>
             </div>
-            <input type="hidden" name="preloadx_nonce_field" value="<?php echo wp_create_nonce( 'preloadx_nonce_action' ); ?>" />
-
+            <input type="hidden" name="preloadx_nonce_field" value="<?php echo esc_attr( wp_create_nonce( 'preloadx_nonce_action' ) ); ?>" />
             <?php submit_button(); ?>
             <div id="preloadx-settings-response-message" style="display: none; padding: 10px; margin: 10px 0; border-radius: 5px; font-weight: bold;"></div>
         </form>
@@ -111,41 +131,3 @@
         <p>Built with <span class="heart">&#10084;</span> | <a href="https://vishwas.me" target="_blank">Vishwas</a></p>
     </div>
 </div>
-
-<script>
-		jQuery("#preloadx-settings-form").on("submit", function(e) {
-            e.preventDefault();
-            var formData = new FormData(jQuery(this)[0]);
-            var value = Object.fromEntries(formData.entries());
-
-            jQuery.ajax({
-                type: 'POST',
-                url: '<?php echo admin_url('admin-ajax.php'); ?>',
-                dataType: 'json',
-                data: {
-                    ...value,
-                    action: 'preloadx_set_options',
-                    preloadx_nonce_field: jQuery('[name="preloadx_nonce_field"]').val()
-                },
-                success: function(response) {
-                    jQuery('#preloadx-settings-response-message').hide();
-                    if (response.success) {
-                        jQuery('#preloadx-settings-response-message').text(response.data).removeClass('error').addClass('success').show();
-                    } else {
-                        jQuery('#preloadx-settings-response-message').text(response.data).removeClass('success').addClass('error').show();
-                    }
-                    setTimeout(function() {
-                        jQuery('#preloadx-settings-response-message').fadeOut();
-                    }, 10000);
-                },
-                error: function(error) {
-                    console.log(error);
-                    jQuery('#preloadx-settings-response-message').text('An error occurred, please try again.').removeClass('success').addClass('error').show();
-                    setTimeout(function() {
-                        jQuery('#preloadx-settings-response-message').fadeOut();
-                    }, 10000);
-                }
-            });
-        });
-
-	</script>

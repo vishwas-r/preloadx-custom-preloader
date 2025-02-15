@@ -5,11 +5,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the public-facing stylesheet and JavaScript.
  *
- * @package    Preloadx_Custom_Preloader
- * @subpackage Preloadx_Custom_Preloader/public
+ * @package    PreloadX_Custom_Preloader
+ * @subpackage Preloadx_Cp_5199/public
  * @author     Vishwas R
  */
-class Preloadx_Custom_Preloader_Public {
+class Preloadx_Cp_5199_Public {
 
 	/**
 	 * The ID of this plugin.
@@ -54,10 +54,10 @@ class Preloadx_Custom_Preloader_Public {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Preloadx_Custom_Preloader_Loader as all of the hooks are defined
+		 * defined in Preloadx_Cp_5199_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Preloadx_Custom_Preloader_Loader will then create the relationship
+		 * The Preloadx_Cp_5199_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
@@ -76,10 +76,10 @@ class Preloadx_Custom_Preloader_Public {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Preloadx_Custom_Preloader_Loader as all of the hooks are defined
+		 * defined in Preloadx_Cp_5199_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Preloadx_Custom_Preloader_Loader will then create the relationship
+		 * The Preloadx_Cp_5199_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */

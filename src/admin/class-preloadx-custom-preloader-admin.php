@@ -6,13 +6,13 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    Preloadx_Custom_Preloader
- * @subpackage Preloadx_Custom_Preloader/admin
+ * @package    PreloadX_Custom_Preloader
+ * @subpackage Preloadx_Cp_5199/admin
  * @author     Vishwas R
  * @link       https://vishwas.me/
  * @since      1.0.0
  */
-class Preloadx_Custom_Preloader_Admin {
+class Preloadx_Cp_5199_Admin {
 
 	/**
 	 *
@@ -123,8 +123,9 @@ class Preloadx_Custom_Preloader_Admin {
     }
 
 	public function preloadx_set_options() {
-		if( !isset( $_POST['preloadx_nonce_field'] ) || !wp_verify_nonce( $_POST['preloadx_nonce_field'], 'preloadx_nonce_action' ) ) {
+		if( !isset( $_POST['preloadx_nonce_field'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['preloadx_nonce_field'] ) ), 'preloadx_nonce_action' ) ) {
 			wp_send_json_error( 'Nonce verification failed.' );
+			wp_die();
 		}
 	
 		// Check if the user has the correct permissions
@@ -148,6 +149,13 @@ class Preloadx_Custom_Preloader_Admin {
 		if ( isset( $_POST['preloadx_color'] ) ) {
 			$options['preloadx_color'] = sanitize_hex_color( $_POST['preloadx_color'] );
 		}
+		if ( isset( $_POST['preloadx_selected'] ) ) {
+			$allowed_preloaders = ['none', 'loading-text', 'spinner', 'square', 'rounded-progress', 'clock-loader', 'hourglass', 'ekg-waves', 'bouncing-bubbles', 'scaling-bubble-colors', 'wavy-colors'];
+			if ( in_array( $_POST['preloadx_selected'], $allowed_preloaders, true ) ) {
+				$options['preloadx_selected'] = sanitize_text_field( $_POST['preloadx_selected'] );
+			}
+		}
+		
 		if ( isset( $_POST['preloadx_selected'] ) ) {
 			$options['preloadx_selected'] = sanitize_text_field( $_POST['preloadx_selected'] );
 		}
@@ -191,7 +199,42 @@ class Preloadx_Custom_Preloader_Admin {
 	public function enqueue_scripts() {
 		$screen = get_current_screen();
 		if($screen->id === "toplevel_page_preloadx-custom-preloader") {
-			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/preloadx-custom-preloader-admin.js', array( 'jquery' ), $this->version, false );
+			wp_enqueue_script( $this->plugin_name . "-script", plugin_dir_url( __FILE__ ) . 'js/preloadx-custom-preloader-admin.js', array( 'jquery' ), $this->version, false );
+
+			wp_add_inline_script( $this->plugin_name . "-script", '
+				jQuery(document).ready(function($) {
+					$("#preloadx-settings-form").on("submit", function(e) {
+						e.preventDefault();
+						var formData = new FormData(this);
+        				formData.append("action", "preloadx_set_options");
+						
+						$.ajax({
+							type: "POST",
+							url: "' . esc_url(admin_url('admin-ajax.php')) . '",
+							dataType: "json",
+							data: Object.fromEntries(formData.entries()),
+							success: function(response) {
+								$("#preloadx-settings-response-message").hide();
+								if (response.success) {
+									$("#preloadx-settings-response-message").text(response.data).removeClass("error").addClass("success").show();
+								} else {
+									$("#preloadx-settings-response-message").text(response.data).removeClass("success").addClass("error").show();
+								}
+								setTimeout(function() {
+									$("#preloadx-settings-response-message").fadeOut();
+								}, 10000);
+							},
+							error: function() {
+								$("#preloadx-settings-response-message").text("An error occurred, please try again.").removeClass("success").addClass("error").show();
+								setTimeout(function() {
+									$("#preloadx-settings-response-message").fadeOut();
+								}, 10000);
+							}
+						});
+					});
+				});
+			');
+
 		}
 
 	}

@@ -2,11 +2,11 @@
 /**
  * Register all actions and filters for the plugin.
  *
- * @package    Preloadx_Custom_Preloader
- * @subpackage Preloadx_Custom_Preloader/includes
+ * @package    PreloadX_Custom_Preloader
+ * @subpackage Preloadx_Cp_5199/includes
  * @author     Vishwas R
  */
-class Preloadx_Custom_Preloader_Loader {
+class Preloadx_Cp_5199_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

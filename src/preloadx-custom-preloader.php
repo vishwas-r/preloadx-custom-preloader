@@ -3,7 +3,7 @@
 /**
  * @link              https://vishwas.me/
  * @since             1.0.0
- * @package           Preloadx_Custom_Preloader
+ * @package           PreloadX_Custom_Preloader
  *
  * @wordpress-plugin
  * Plugin Name:       PreloadX - Custom Preloader
@@ -34,22 +34,22 @@ define( 'PRELOADX_CUSTOM_PRELOADER_VERSION', '1.0.0' );
  * The code that runs during plugin activation.
  * This action is documented in includes/class-preloadx-custom-preloader-activator.php
  */
-function activate_preloadx_custom_preloader() {
+function preloadx_cp_activate() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-preloadx-custom-preloader-activator.php';
-	Preloadx_Custom_Preloader_Activator::activate();
+	Preloadx_Cp_5199_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-preloadx-custom-preloader-deactivator.php
  */
-function deactivate_preloadx_custom_preloader() {
+function depreloadx_cp_deactivate() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-preloadx-custom-preloader-deactivator.php';
-	Preloadx_Custom_Preloader_Deactivator::deactivate();
+	Preloadx_Cp_5199_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_preloadx_custom_preloader' );
-register_deactivation_hook( __FILE__, 'deactivate_preloadx_custom_preloader' );
+register_activation_hook( __FILE__, 'preloadx_cp_activate' );
+register_deactivation_hook( __FILE__, 'depreloadx_cp_deactivate' );
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -66,10 +66,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-preloadx-custom-preloader.
  *
  * @since    1.0.0
  */
-function run_preloadx_custom_preloader() {
+function preloadx_cp_run() {
 
-	$plugin = new Preloadx_Custom_Preloader();
+	$plugin = new Preloadx_Cp_5199();
 	$plugin->run();
 
 }
-run_preloadx_custom_preloader();
+preloadx_cp_run();
