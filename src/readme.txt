@@ -1,7 +1,7 @@
 === PreloadX - Custom Preloader ===
 Contributors: vishwasr
 Donate link: https://www.paypal.com/paypalme/vishwasr92
-Tags: preloader, animation, loader, WordPress preloader, custom preloader, css loader
+Tags: preloader, animation, loader, WordPress preloader, css loader
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.4
@@ -9,8 +9,7 @@ Stable tag: 1.0.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Customize your WordPress site's preloader with multiple CSS preloaders and flexible background options, including colors, gradients, or images, with adjustable foreground colors for some loaders.
-
+Customize your site's preloader with multiple CSS loaders, flexible background options (colors, gradients, images), and adjustable foreground colors.
 == Description ==
 
 Enhance your WordPress site with a fully customizable preloader.

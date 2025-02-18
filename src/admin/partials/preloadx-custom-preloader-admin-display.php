@@ -113,7 +113,7 @@
                                 ?>
                             </div>
                             <label>
-                                <input type="radio" name="preloadx_selected" value="<?php echo esc_attr( $value ); ?>" <?php echo $checked; ?> />
+                                <input type="radio" name="preloadx_selected" value="<?php echo esc_attr( $value ); ?>" <?php echo esc_attr( $checked ); ?> />
                                 <?php echo esc_html( $label ); ?>
                             </label>
                         </div>

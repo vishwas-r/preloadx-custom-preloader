@@ -52,55 +52,37 @@ class Preloadx_Cp_5199_Admin {
 		register_setting( 
 			'preloadx_options_group', 
 			'preloadx_selected', 
-			array(
-				'type' => 'string',
-				'sanitize_callback' => 'sanitize_text_field',
-			)
+			'sanitize_text_field'
 		);
 	
 		register_setting( 
 			'preloadx_options_group', 
 			'preloadx_color', 
-			array(
-				'type' => 'string',
-				'sanitize_callback' => 'sanitize_text_field',
-			)
+			'sanitize_text_field'
 		);
 	
 		register_setting( 
 			'preloadx_options_group', 
 			'preloadx_bgcolor', 
-			array(
-				'type' => 'string',
-				'sanitize_callback' => 'sanitize_text_field',
-			)
+			'sanitize_text_field'
 		);
 	
 		register_setting( 
 			'preloadx_options_group', 
 			'preloadx_bggradient', 
-			array(
-				'type' => 'string',
-				'sanitize_callback' => 'sanitize_text_field',
-			)
+			'sanitize_text_field'
 		);
 	
 		register_setting( 
 			'preloadx_options_group', 
 			'preloadx_bgimage', 
-			array(
-				'type' => 'string',
-				'sanitize_callback' => 'sanitize_text_field',
-			)
+			'sanitize_url'
 		);
 	
 		register_setting( 
 			'preloadx_options_group', 
 			'preloadx_bgtype', 
-			array(
-				'type' => 'string',
-				'sanitize_callback' => 'sanitize_text_field',
-			)
+			'sanitize_text_field'
 		);
 		add_settings_section( 'preloadx_section', '', null, 'preloadx-custom-preloader' );
 	}
@@ -135,30 +117,26 @@ class Preloadx_Cp_5199_Admin {
 	
 		$options = [];
 		if ( isset( $_POST['preloadx_bgtype'] ) ) {
-			$options['preloadx_bgtype'] = sanitize_text_field( $_POST['preloadx_bgtype'] );
+			$options['preloadx_bgtype'] = sanitize_text_field( wp_unslash( $_POST['preloadx_bgtype'] ) );
 		}
 		if ( isset( $_POST['preloadx_bgcolor'] ) ) {
-			$options['preloadx_bgcolor'] = sanitize_hex_color( $_POST['preloadx_bgcolor'] );
+			$options['preloadx_bgcolor'] = sanitize_hex_color( wp_unslash( $_POST['preloadx_bgcolor'] ) );
 		}
 		if ( isset( $_POST['preloadx_bggradient'] ) ) {
-			$options['preloadx_bggradient'] = sanitize_text_field( $_POST['preloadx_bggradient'] );
+			$options['preloadx_bggradient'] = sanitize_text_field( wp_unslash( $_POST['preloadx_bggradient'] ) );
 		}
 		if ( isset( $_POST['preloadx_bgimage'] ) ) {
-			$options['preloadx_bgimage'] = esc_url_raw( $_POST['preloadx_bgimage'] );
+			$options['preloadx_bgimage'] = esc_url_raw( wp_unslash( $_POST['preloadx_bgimage'] ) );
 		}
 		if ( isset( $_POST['preloadx_color'] ) ) {
-			$options['preloadx_color'] = sanitize_hex_color( $_POST['preloadx_color'] );
+			$options['preloadx_color'] = sanitize_hex_color( wp_unslash( $_POST['preloadx_color'] ) );
 		}
 		if ( isset( $_POST['preloadx_selected'] ) ) {
 			$allowed_preloaders = ['none', 'loading-text', 'spinner', 'square', 'rounded-progress', 'clock-loader', 'hourglass', 'ekg-waves', 'bouncing-bubbles', 'scaling-bubble-colors', 'wavy-colors'];
-			if ( in_array( $_POST['preloadx_selected'], $allowed_preloaders, true ) ) {
-				$options['preloadx_selected'] = sanitize_text_field( $_POST['preloadx_selected'] );
+			if ( in_array( wp_unslash( $_POST['preloadx_selected'] ), $allowed_preloaders, true ) ) {
+				$options['preloadx_selected'] = sanitize_text_field( wp_unslash( $_POST['preloadx_selected'] ) );
 			}
-		}
-		
-		if ( isset( $_POST['preloadx_selected'] ) ) {
-			$options['preloadx_selected'] = sanitize_text_field( $_POST['preloadx_selected'] );
-		}
+		}		
 	
 		foreach ($options as $key => $value) {
 			update_option( $key, $value );
