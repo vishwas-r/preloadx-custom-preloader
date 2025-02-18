@@ -31,17 +31,15 @@ class Preloadx_Cp_5199_Utilities {
         }
 
         $inline_css = "
-            <style>
                 :root {
                     --preloader-color:" . esc_attr( $color ) . "
                 }
                 .pxpreloader-preview, .pxpreloader {" .
-                    esc_attr($background_style)
+                    esc_attr( $background_style )
                 . "}
-            </style>
         ";
-
-        echo $inline_css;
+        wp_enqueue_style( 'preloadx-custom-preloader-style', plugin_dir_url( __DIR__ ) . 'assets/css/preloadx-style.css', array(), $this->version, 'all' );
+        wp_add_inline_style( 'preloadx-custom-preloader-style', $inline_css );
     }
 
     public function preloadx_get_preloader_html( $selected_preloader ) {

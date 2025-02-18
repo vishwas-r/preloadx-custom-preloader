@@ -39,8 +39,8 @@
                 )
             );
             
-            echo wp_kses($preloader_html, $allowed_tags);            
-            add_action('wp_head', $preloader_utilities->add_inline_root_styles());
+            echo wp_kses($preloader_html, $allowed_tags);    
+            add_action('wp_enqueue_scripts', $preloader_utilities->add_inline_root_styles());
         }
     }
     add_action( 'wp_body_open', 'attach_preloader_to_body' );

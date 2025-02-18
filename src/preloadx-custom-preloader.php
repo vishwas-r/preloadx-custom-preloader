@@ -15,7 +15,6 @@
  * License:           GPL-3.0
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain:       preloadx-custom-preloader
- * Domain Path:       /languages
  */
 
 // If this file is called directly, abort.

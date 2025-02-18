@@ -185,10 +185,8 @@ class Preloadx_Cp_5199_Admin {
 	public function enqueue_styles() {
 		$screen = get_current_screen();
 		if($screen->id === "toplevel_page_preloadx-custom-preloader") {
-			wp_enqueue_style( $this->plugin_name . 'admin-style', plugin_dir_url( __FILE__ ) . 'css/preloadx-admin-style.css', array(), $this->version, 'all' );
-			wp_enqueue_style( $this->plugin_name . '-style', plugin_dir_url( __DIR__ ) . 'assets/css/preloadx-style.css', array(), $this->version, 'all' );
+			wp_enqueue_style( $this->plugin_name . '-admin-style', plugin_dir_url( __FILE__ ) . 'css/preloadx-admin-style.css', array(), $this->version, 'all' );
 		}
-		
 	}
 
 	/**

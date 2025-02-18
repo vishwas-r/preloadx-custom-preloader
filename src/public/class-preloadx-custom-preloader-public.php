@@ -62,7 +62,7 @@ class Preloadx_Cp_5199_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name . '-style', plugin_dir_url( __DIR__ ) . 'assets/css/preloadx-style.css', array(), $this->version, 'all' );
+		//wp_enqueue_style( $this->plugin_name . '-style', plugin_dir_url( __DIR__ ) . 'assets/css/preloadx-style.css', array(), $this->version, 'all' );
 	}
 
 	/**
