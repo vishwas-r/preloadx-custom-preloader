@@ -1,4 +1,11 @@
 # PreloadX - Custom Preloader
+
+[![WordPress Plugin Version](https://img.shields.io/wordpress/plugin/v/preloadx-custom-preloader.svg)](https://wordpress.org/plugins/preloadx-custom-preloader/)
+[![WordPress Tested Up To](https://img.shields.io/wordpress/v/preloadx-custom-preloader.svg)](https://wordpress.org/plugins/preloadx-custom-preloader/)
+[![WordPress Plugin Rating](https://img.shields.io/wordpress/plugin/r/preloadx-custom-preloader.svg)](https://wordpress.org/plugins/preloadx-custom-preloader/)
+[![WordPress Plugin Downloads](https://img.shields.io/wordpress/plugin/dt/preloadx-custom-preloader.svg)](https://wordpress.org/plugins/preloadx-custom-preloader/)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+
 Customize your WordPress site's preloader with multiple CSS preloaders and flexible background options, including colors, gradients, or images, with adjustable foreground colors for some loaders.
 
 ---
