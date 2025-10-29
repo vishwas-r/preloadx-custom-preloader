@@ -38,9 +38,11 @@ class Preloadx_Cp_5199_Utilities {
                     esc_attr( $background_style )
                 . "}
         ";
-        wp_enqueue_style( 'preloadx-custom-preloader-style', plugin_dir_url( __DIR__ ) . 'assets/css/preloadx-style.css', array(), $this->version, 'all' );
+        $version = PRELOADX_CUSTOM_PRELOADER_VERSION;
+        wp_enqueue_style( 'preloadx-custom-preloader-style', plugin_dir_url( __DIR__ ) . 'assets/css/preloadx-style.css', array(), $version, 'all' );
         wp_add_inline_style( 'preloadx-custom-preloader-style', $inline_css );
     }
+
 
     public function preloadx_get_preloader_html( $selected_preloader ) {
         $is_admin = is_admin();

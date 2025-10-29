@@ -22,21 +22,23 @@
   align-items: center;
   overflow: hidden;
   position: relative;
+  max-height: 200px;
+  margin: 0 auto;
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 200px;
 }
 
 .preloader-preview .pxpreloader-preview {
   height: 200px;
-  width: 200px;
-  line-height: 200px;
-  margin: 0 auto;
-  border: 1px solid black;
-  border-radius: 5px;
+  width: 100%;
+  line-height: 200px; 
   overflow: hidden;
   color: var(--preloader-color, #3498db);
-  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
 }
 
 .preloader-preview .pxpreloader-preview .loader {
