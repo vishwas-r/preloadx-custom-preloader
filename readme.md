@@ -66,6 +66,9 @@ If you prefer to install manually:
 
 ## Screenshots
 
+### Admin Dashboard
+![Admin Dashboard](images/admin-dashboard.png)
+
 ### Infinity Loop
 ![Infinity Loop](images/infinity-loop.png)
 
