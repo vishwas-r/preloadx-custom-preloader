@@ -9,23 +9,20 @@
  * Plugin Name:       PreloadX - Custom Preloader
  * Plugin URI:        https://github.com/vishwas-r/preloadx-custom-preloader
  * Description:       Customize your WordPress site's preloader with multiple CSS preloaders and flexible background options, including colors, gradients, or images, with adjustable foreground colors.
- * Version:           1.1.0
+ * Version:           1.2.0
  * Author:            Vishwas R
  * Author URI:        https://vishwas.me/
- * License:           GPL-3.0
- * License URI:       https://www.gnu.org/licenses/gpl-3.0.txt
+ * License:           GPL-2.0+
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       preloadx-custom-preloader
+ * Domain Path:       /languages
  */
 
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	die;
-}
+if ( !defined( 'WPINC' ) ) exit;
 
-/**
- * Current plugin version.
- */
-define( 'PRELOADX_CUSTOM_PRELOADER_VERSION', '1.1.0' );
+// Define plugin constants
+define( 'PRELOADX_CUSTOM_PRELOADER_VERSION', '1.2.0' );
 
 /**
  * The code that runs during plugin activation.
@@ -40,13 +37,13 @@ function preloadx_cp_activate() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-preloadx-custom-preloader-deactivator.php
  */
-function depreloadx_cp_deactivate() {
+function preloadx_cp_deactivate_plugin() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-preloadx-custom-preloader-deactivator.php';
 	Preloadx_Cp_5199_Deactivator::deactivate();
 }
 
 register_activation_hook( __FILE__, 'preloadx_cp_activate' );
-register_deactivation_hook( __FILE__, 'depreloadx_cp_deactivate' );
+register_deactivation_hook( __FILE__, 'preloadx_cp_deactivate_plugin' );
 
 /**
  * The core plugin class that is used to define internationalization,

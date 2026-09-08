@@ -15,12 +15,15 @@ Enhance your WordPress site with a fully customizable preloader.
 PreloadX allows you to seamlessly add a preloader to your site with multiple CSS-based preloader styles to choose from. Customize the preloader to fit your site’s design by adjusting the background color, gradient, or even uploading a custom image. For some preloader styles, you can also adjust the foreground color, though some loaders use multiple colors for visual effects and do not support this customization.
 
 ### Key Features:
-- **Multiple CSS preloaders** to choose from
-- **Customizable foreground color** for some preloaders
-- **Background color, gradient, or image options** for full customization
-- **Fully responsive** and works across all devices
-- **Easy-to-use settings page** for quick configuration
-- **Lightweight and optimized** for performance
+- **17 Pure-CSS & Modern Preloaders** (including Infinity Loop, 3D Isometric Cube, Equalizer Wave, Dual Orbital Ring, Neon Radar Scanner, Real Progress Bar, and Custom Image/Logo).
+- **Real-Time Live Customization:** Adjustable loader size (`30px - 160px`), corner/border radius (`0px - 50px`), and font size (`12px - 48px`).
+- **Modern Full-Width Admin Dashboard:** Clean, card-clickable selection interface with live preview badges and zero circular radio clutter.
+- **Customizable Foreground Color** for preloaders with instant live preview.
+- **Background Color, Gradient, or Image Options** for full customization.
+- **Advanced Display Rules:** Hide on mobile or show only on the homepage.
+- **Exit Animations:** Choose between Fade Out, Slide Up, or Split transitions.
+- **Minimum Load Time & Fallback Close Button** to ensure the best user experience.
+- **Lightweight, Zero External Dependencies:** 100% self-contained pure-CSS & Vanilla JavaScript.
 - **Compatible with any WordPress theme**
 
 ## Installation

@@ -40,6 +40,7 @@ class Preloadx_Cp_5199_Public {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+        require_once (plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-preloadx-custom-preloader-utilities.php');
 		require_once (plugin_dir_path( __FILE__ ) . 'partials/'. $this->plugin_name . '-public-display.php');
 	}
 
@@ -50,19 +51,10 @@ class Preloadx_Cp_5199_Public {
 	 */
 	public function enqueue_styles() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Preloadx_Cp_5199_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Preloadx_Cp_5199_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		//wp_enqueue_style( $this->plugin_name . '-style', plugin_dir_url( __DIR__ ) . 'assets/css/preloadx-style.css', array(), $this->version, 'all' );
+		if ( class_exists( 'Preloadx_Cp_5199_Utilities' ) ) {
+            $utilities = new Preloadx_Cp_5199_Utilities();
+            $utilities->add_inline_root_styles();
+        }
 	}
 
 	/**
@@ -71,21 +63,16 @@ class Preloadx_Cp_5199_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
+		wp_enqueue_script( $this->plugin_name . '-public', plugin_dir_url( __FILE__ ) . 'js/preloadx-custom-preloader-public.js', array(), $this->version, true );
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Preloadx_Cp_5199_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Preloadx_Cp_5199_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+		$preloadx_settings = array(
+			'exit_animation' => get_option( 'preloadx_exit_animation', 'fade' ),
+			'min_load_time'  => get_option( 'preloadx_min_load_time', '500' ),
+			'close_button'   => get_option( 'preloadx_close_button', '0' ),
+			'selected'       => get_option( 'preloadx_selected', 'none' )
+		);
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/preloadx-custom-preloader-public.js', array( 'jquery' ), $this->version, false );
-
+		wp_localize_script( $this->plugin_name . '-public', 'preloadxSettings', $preloadx_settings );
 	}
 
 }

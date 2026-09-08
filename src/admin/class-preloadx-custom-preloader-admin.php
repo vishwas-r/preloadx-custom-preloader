@@ -49,41 +49,30 @@ class Preloadx_Cp_5199_Admin {
 	}
 
 	public function preloadx_settings_register() {		
-		register_setting( 
-			'preloadx_options_group', 
-			'preloadx_selected', 
-			'sanitize_text_field'
+		$settings = array(
+			'preloadx_selected' => 'sanitize_text_field',
+			'preloadx_color' => 'sanitize_text_field',
+			'preloadx_bgcolor' => 'sanitize_text_field',
+			'preloadx_bggradient' => 'sanitize_text_field',
+			'preloadx_bgimage' => 'sanitize_url',
+			'preloadx_bgtype' => 'sanitize_text_field',
+			// Dimensions & Customizations
+			'preloadx_loader_size' => 'absint',
+			'preloadx_loader_radius' => 'absint',
+			'preloadx_font_size' => 'absint',
+			'preloadx_custom_image' => 'sanitize_url',
+			'preloadx_text_reveal_text' => 'sanitize_text_field',
+			'preloadx_hide_mobile' => 'sanitize_text_field',
+			'preloadx_homepage_only' => 'sanitize_text_field',
+			'preloadx_exit_animation' => 'sanitize_text_field',
+			'preloadx_min_load_time' => 'absint',
+			'preloadx_close_button' => 'sanitize_text_field'
 		);
-	
-		register_setting( 
-			'preloadx_options_group', 
-			'preloadx_color', 
-			'sanitize_text_field'
-		);
-	
-		register_setting( 
-			'preloadx_options_group', 
-			'preloadx_bgcolor', 
-			'sanitize_text_field'
-		);
-	
-		register_setting( 
-			'preloadx_options_group', 
-			'preloadx_bggradient', 
-			'sanitize_text_field'
-		);
-	
-		register_setting( 
-			'preloadx_options_group', 
-			'preloadx_bgimage', 
-			'sanitize_url'
-		);
-	
-		register_setting( 
-			'preloadx_options_group', 
-			'preloadx_bgtype', 
-			'sanitize_text_field'
-		);
+
+		foreach ($settings as $setting_name => $sanitize_callback) {
+			register_setting('preloadx_options_group', $setting_name, $sanitize_callback);
+		}
+
 		add_settings_section( 'preloadx_section', '', null, 'preloadx-custom-preloader' );
 	}
 
@@ -132,11 +121,60 @@ class Preloadx_Cp_5199_Admin {
 			$options['preloadx_color'] = sanitize_hex_color( wp_unslash( $_POST['preloadx_color'] ) );
 		}
 		if ( isset( $_POST['preloadx_selected'] ) ) {
-			$allowed_preloaders = ['none', 'loading-text', 'spinner', 'square', 'rounded-progress', 'clock-loader', 'hourglass', 'ekg-waves', 'bouncing-bubbles', 'scaling-bubble-colors', 'wavy-colors'];
+			$allowed_preloaders = [
+				'none',
+				'classic-spinner',
+				'pulse-ring',
+				'double-bounce',
+				'wave-dots',
+				'spinning-square',
+				'rotating-chase',
+				'progress-bar',
+				'equalizer-wave',
+				'morphing-blob',
+				'infinity-loop',
+				'isometric-cube',
+				'orbital-ring',
+				'radar-scanner',
+				'text-reveal',
+				'svg-outline',
+				'custom-image'
+			];
 			if ( in_array( wp_unslash( $_POST['preloadx_selected'] ), $allowed_preloaders, true ) ) {
 				$options['preloadx_selected'] = sanitize_text_field( wp_unslash( $_POST['preloadx_selected'] ) );
 			}
-		}		
+		}
+		if ( isset( $_POST['preloadx_loader_size_unit'] ) ) {
+			$unit = sanitize_text_field( wp_unslash( $_POST['preloadx_loader_size_unit'] ) );
+			$options['preloadx_loader_size_unit'] = in_array( $unit, array( '%', 'px' ), true ) ? $unit : '%';
+		}
+		if ( isset( $_POST['preloadx_loader_size'] ) ) {
+			$options['preloadx_loader_size'] = absint( wp_unslash( $_POST['preloadx_loader_size'] ) );
+		}
+		if ( isset( $_POST['preloadx_loader_radius'] ) ) {
+			$options['preloadx_loader_radius'] = absint( wp_unslash( $_POST['preloadx_loader_radius'] ) );
+		}
+		if ( isset( $_POST['preloadx_font_size'] ) ) {
+			$options['preloadx_font_size'] = absint( wp_unslash( $_POST['preloadx_font_size'] ) );
+		}
+		if ( isset( $_POST['preloadx_custom_image'] ) ) {
+			$options['preloadx_custom_image'] = esc_url_raw( wp_unslash( $_POST['preloadx_custom_image'] ) );
+		}
+		if ( isset( $_POST['preloadx_text_reveal_text'] ) ) {
+			$options['preloadx_text_reveal_text'] = sanitize_text_field( wp_unslash( $_POST['preloadx_text_reveal_text'] ) );
+		}
+		
+		// Checkboxes are only set if checked, so we need to default to '0' if not set
+		$options['preloadx_hide_mobile'] = isset( $_POST['preloadx_hide_mobile'] ) ? '1' : '0';
+		$options['preloadx_homepage_only'] = isset( $_POST['preloadx_homepage_only'] ) ? '1' : '0';
+		$options['preloadx_close_button'] = isset( $_POST['preloadx_close_button'] ) ? '1' : '0';
+		
+		if ( isset( $_POST['preloadx_exit_animation'] ) ) {
+			$options['preloadx_exit_animation'] = sanitize_text_field( wp_unslash( $_POST['preloadx_exit_animation'] ) );
+		}
+		if ( isset( $_POST['preloadx_min_load_time'] ) ) {
+			$options['preloadx_min_load_time'] = absint( wp_unslash( $_POST['preloadx_min_load_time'] ) );
+		}
 	
 		foreach ($options as $key => $value) {
 			update_option( $key, $value );
@@ -164,6 +202,10 @@ class Preloadx_Cp_5199_Admin {
 		$screen = get_current_screen();
 		if($screen->id === "toplevel_page_preloadx-custom-preloader") {
 			wp_enqueue_style( $this->plugin_name . '-admin-style', plugin_dir_url( __FILE__ ) . 'css/preloadx-admin-style.css', array(), $this->version, 'all' );
+            if ( class_exists( 'Preloadx_Cp_5199_Utilities' ) ) {
+                $utilities = new Preloadx_Cp_5199_Utilities();
+                $utilities->add_inline_root_styles();
+            }
 		}
 	}
 
@@ -174,44 +216,16 @@ class Preloadx_Cp_5199_Admin {
 	 */
 	public function enqueue_scripts() {
 		$screen = get_current_screen();
-		if($screen->id === "toplevel_page_preloadx-custom-preloader") {
-			wp_enqueue_script( $this->plugin_name . "-script", plugin_dir_url( __FILE__ ) . 'js/preloadx-custom-preloader-admin.js', array( 'jquery' ), $this->version, false );
+		if ( $screen && $screen->id === 'toplevel_page_preloadx-custom-preloader' ) {
+			wp_enqueue_script( $this->plugin_name . '-script', plugin_dir_url( __FILE__ ) . 'js/preloadx-custom-preloader-admin.js', array( 'jquery' ), $this->version, true );
 
-			wp_add_inline_script( $this->plugin_name . "-script", '
-				jQuery(document).ready(function($) {
-					$("#preloadx-settings-form").on("submit", function(e) {
-						e.preventDefault();
-						var formData = new FormData(this);
-        				formData.append("action", "preloadx_set_options");
-						
-						$.ajax({
-							type: "POST",
-							url: "' . esc_url(admin_url('admin-ajax.php')) . '",
-							dataType: "json",
-							data: Object.fromEntries(formData.entries()),
-							success: function(response) {
-								$("#preloadx-settings-response-message").hide();
-								if (response.success) {
-									$("#preloadx-settings-response-message").text(response.data).removeClass("error").addClass("success").show();
-								} else {
-									$("#preloadx-settings-response-message").text(response.data).removeClass("success").addClass("error").show();
-								}
-								setTimeout(function() {
-									$("#preloadx-settings-response-message").fadeOut();
-								}, 10000);
-							},
-							error: function() {
-								$("#preloadx-settings-response-message").text("An error occurred, please try again.").removeClass("success").addClass("error").show();
-								setTimeout(function() {
-									$("#preloadx-settings-response-message").fadeOut();
-								}, 10000);
-							}
-						});
-					});
-				});
-			');
-
+			wp_localize_script(
+				$this->plugin_name . '-script',
+				'preloadxAdmin',
+				array(
+					'ajax_url' => admin_url( 'admin-ajax.php' ),
+				)
+			);
 		}
-
 	}
 }

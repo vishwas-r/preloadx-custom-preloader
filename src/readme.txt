@@ -3,11 +3,11 @@ Contributors: vishwasr
 Donate link: https://www.paypal.com/paypalme/vishwasr92
 Tags: preloader, animation, loader, WordPress preloader, css loader
 Requires at least: 5.0
-Tested up to: 6.7
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.0
-License: GPLv3
-License URI: https://www.gnu.org/licenses/gpl-3.0.html
+Stable tag: 1.2.0
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Customize your site's preloader with multiple CSS loaders, flexible background options (colors, gradients, images), and adjustable foreground colors.
 == Description ==
@@ -17,12 +17,15 @@ Enhance your WordPress site with a fully customizable preloader.
 PreloadX allows you to seamlessly add a preloader to your site with multiple CSS-based preloader styles to choose from. Customize the preloader to fit your site’s design by adjusting the background color, gradient, or even uploading a custom image. For some preloader styles, you can also adjust the foreground color, though some loaders use multiple colors for visual effects and do not support this customization.
 
 === Key Features: ===
-- **Multiple CSS preloaders** to choose from.
-- **Customizable foreground color** for some preloaders.
+- **12+ CSS & Custom preloaders** to choose from (including Real Progress Bar and Custom Image/Logo).
+- **Customizable foreground color** for most preloaders.
 - **Background color, gradient, or image options** for full customization.
+- **Advanced Display Rules:** Hide on mobile or show only on the homepage.
+- **Exit Animations:** Choose between Fade Out, Slide Up, or Split transitions.
+- **Minimum Load Time & Fallback Close Button** to ensure the best user experience.
 - **Fully responsive** and works across all devices.
-- **Easy-to-use settings page** for quick configuration.
-- **Lightweight and optimized** for performance.
+- **Tabbed, easy-to-use settings page** for quick configuration.
+- **Lightweight, Vanilla JS, and optimized** for performance (No jQuery).
 - **Compatible with any WordPress theme**.
 
 == Installation ==
@@ -82,6 +85,24 @@ Yes! In addition to solid colors, you can customize the background with either a
 No coding is required! PreloadX is designed to be user-friendly, with an easy-to-use settings page where you can customize the preloader without needing to write any code.
 
 == Changelog ==
+
+= 1.2.0 =
+* NEW: Added 17 modern preloader animations including 5 new pure-CSS animations: Infinity Loop, 3D Isometric Cube, Equalizer Wave, Dual Orbital Ring, and Neon Radar Scanner.
+* NEW: Real-time Loader Dimensions & Typography controls (adjust size, corner/border radius, and font scaling).
+* NEW: Full-width responsive desktop layout with clean, direct card-click selection.
+* TWEAK: Removed heavy external JS dependencies in favor of lightweight, high-performance pure-CSS animations.
+* TWEAK: Combined General & Appearance with Preloader Gallery into an intuitive unified settings tab.
+* FIX: Fixed frontend asset resolution and CSS rendering on public pages.
+* FIX: Fixed data-text attribute preservation for cinematic text reveal animations.
+
+= 1.1.0 =
+* NEW: Added Custom Image/Logo loader support.
+* NEW: Added Real Progress Bar loader.
+* NEW: Added Advanced Display Rules (Hide on Mobile, Show only on Homepage).
+* NEW: Added Exit Animations (Fade Out, Slide Up, Split).
+* NEW: Added Minimum Load Time & Fallback Close Button options.
+* TWEAK: Revamped Admin UI with a modern Tabbed Interface.
+* TWEAK: Completely refactored frontend JS to Vanilla JavaScript (removed jQuery dependency).
 
 = 1.0.0 =
 * Initial release with 10 Preloaders.

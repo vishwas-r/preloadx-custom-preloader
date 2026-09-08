@@ -90,6 +90,7 @@ class Preloadx_Cp_5199 {
 		 * core plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-preloadx-custom-preloader-loader.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-preloadx-custom-preloader-utilities.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
