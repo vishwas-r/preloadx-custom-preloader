@@ -3,7 +3,7 @@ Contributors: vishwasr
 Donate link: https://www.paypal.com/paypalme/vishwasr92
 Tags: preloader, animation, loader, WordPress preloader, css loader
 Requires at least: 5.0
-Tested up to: 7.1
+Tested up to: 6.7
 Requires PHP: 7.4
 Stable tag: 1.2.0
 License: GPLv2 or later
