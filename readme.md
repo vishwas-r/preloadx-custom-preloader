@@ -64,6 +64,56 @@ If you prefer to install manually:
 2. Using your preferred FTP application, upload the plugin folder to your WordPress site’s `/wp-content/plugins/` directory (or upload the ZIP via **Plugins > Add New > Upload Plugin**).
 3. Activate **PreloadX - Custom Preloader** from the **Plugins** menu.
 
+## Screenshots
+
+### Infinity Loop
+![Infinity Loop](images/infinity-loop.png)
+
+### 3D Celestial Orbit
+![3D Celestial Orbit](images/orbital-ring.png)
+
+### Neon Radar Scanner
+![Neon Radar Scanner](images/radar-scanner.png)
+
+### Real Progress Bar
+![Real Progress Bar](images/progress-bar.png)
+
+### 3D Isometric Cube
+![3D Isometric Cube](images/isometric-cube.png)
+
+### Equalizer Wave
+![Equalizer Wave](images/equalizer-wave.png)
+
+### Morphing Fluid Blob
+![Morphing Fluid Blob](images/morphing-blob.png)
+
+### Classic Spinner
+![Classic Spinner](images/classic-spinner.png)
+
+### Pulse Ring
+![Pulse Ring](images/pulse-ring.png)
+
+### Double Bounce
+![Double Bounce](images/double-bounce.png)
+
+### Wave Dots
+![Wave Dots](images/wave-dots.png)
+
+### Spinning Square
+![Spinning Square](images/spinning-square.png)
+
+### Rotating Chase
+![Rotating Chase](images/rotating-chase.png)
+
+### Cinematic Text Reveal
+![Cinematic Text Reveal](images/text-reveal.png)
+
+### SVG Outline Drawing
+![SVG Outline Drawing](images/svg-outline.png)
+
+### Custom Image / Logo
+![Custom Image / Logo](images/custom-image.png)
+
 ## FAQs
 
 ### How do I choose and customize a preloader?
