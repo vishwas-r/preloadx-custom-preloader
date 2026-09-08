@@ -9,7 +9,7 @@
  * Plugin Name:       PreloadX - Custom Preloader
  * Plugin URI:        https://github.com/vishwas-r/preloadx-custom-preloader
  * Description:       Customize your WordPress site's preloader with multiple CSS preloaders and flexible background options, including colors, gradients, or images, with adjustable foreground colors.
- * Version:           1.2.0
+ * Version:           1.1.0
  * Author:            Vishwas R
  * Author URI:        https://vishwas.me/
  * License:           GPL-2.0+
@@ -22,7 +22,7 @@
 if ( !defined( 'WPINC' ) ) exit;
 
 // Define plugin constants
-define( 'PRELOADX_CUSTOM_PRELOADER_VERSION', '1.2.0' );
+define( 'PRELOADX_CUSTOM_PRELOADER_VERSION', '1.1.0' );
 
 /**
  * The code that runs during plugin activation.

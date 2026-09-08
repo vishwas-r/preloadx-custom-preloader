@@ -15,7 +15,7 @@
 <div class="wrap preloadx-admin-wrap">
     <div class="preloadx-header">
         <div class="preloadx-brand">
-            <h1 class="preloadx-title">PreloadX <span class="preloadx-version-badge">v1.2.0</span></h1>
+            <h1 class="preloadx-title">PreloadX <span class="preloadx-version-badge">v1.1.0</span></h1>
             <p class="preloadx-subtitle">Customize modern, ultra-smooth page loaders for your WordPress website</p>
         </div>
     </div>
