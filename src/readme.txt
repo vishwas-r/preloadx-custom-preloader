@@ -125,6 +125,18 @@ No. PreloadX is engineered for maximum performance:
 3. 3D Celestial Orbit animation with inclined 3D elliptical rings and satellites.
 4. Neon Radar Scanner with animated sweep fan and center blip.
 5. Real Progress Bar loader with live page load percentage.
+6. 3D Isometric Cube loader with perspective folding blocks.
+7. Equalizer Wave loader with rhythmic audio frequency bars.
+8. Morphing Fluid Blob loader with smooth shape-shifting liquid physics.
+9. Classic Spinner with circular rotating ring.
+10. Pulse Ring loader with expanding radial pulse.
+11. Double Bounce loader with harmonic counter-phase spheres.
+12. Wave Dots loader with rhythmic sine wave bouncing dots.
+13. Spinning Square loader with 3D tumbling geometric plane.
+14. Rotating Chase loader with orbiting dot cluster.
+15. Cinematic Text Reveal loader with dynamic clip-path typography.
+16. SVG Outline Drawing loader with animated stroke outline mask.
+17. Custom Image / Logo loader with pulsing brand logo.
 
 == Changelog ==
 
